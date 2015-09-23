@@ -90,19 +90,12 @@
         <antcall target="build"/>
     </target>
               	
-              	<target name="war" description="Bundles the application as a WAR file" depends="clean, build">
-              	              	    <mkdir dir="WebContent/WEB-INF/classes"/>
-              	              	     
-              	              	    <copy includeemptydirs="false" todir="WebContent/WEB-INF/classes">
-              	              	            <fileset dir="build/classes">
-              	              	            <include name="**/*.class"/>
-              	              	            </fileset>
-              	              	    </copy>
-              	              	     
-              	              	    <war destfile="UploadServlet30.war"
-              	              	        basedir="WebContent"
-              	              	        needxmlfile="false">
-              	              	    </war>
-              	              	</target>
+              	<target name="dist" description="Unpack the file to war file" depends="init">
+              	   <war basedir="${dir.webRoot}" warfile="${webapp.deployPath}/${project.distname}.war"
+              	                                     webxml="${dir.webRoot}/WEB-INF/web.xml">
+              	    <exclude name="WEB-INF/web.xml"/>
+              	    <exclude name="WEB-INF/lib/junit-4.6.jar"/>
+              	   </war>
+              	</target>
               	              
 </project>
